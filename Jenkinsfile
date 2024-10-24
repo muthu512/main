@@ -1,32 +1,20 @@
 pipeline {
     agent any
-
     stages {
-        stage('Clone Repository') {
+        stage('Checkout') {
             steps {
-                git 'https://github.com/muthu512/main.git' // Replace with your repository URL
+                git 'https://github.com/muthu512/main.git'
             }
         }
-
         stage('Build') {
             steps {
                 sh './mvnw clean package'
             }
         }
-
         stage('Run Application') {
             steps {
-                sh 'java -jar target/online-1-0.0.1-SNAPSHOT.jar' // Adjust path if necessary
+                sh 'java -jar target/your-app-name.jar'
             }
-        }
-    }
-
-    post {
-        success {
-            echo 'Build and deployment successful!'
-        }
-        failure {
-            echo 'Build or deployment failed.'
         }
     }
 }
